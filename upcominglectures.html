@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upcoming Lectures — DIA</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+
+<!-- ===================================== -->
+<!-- NAVBAR -->
+<!-- ===================================== -->
+
+<header class="navbar">
+
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo12.png" alt="DIA logo">
+  </a>
+
+  <a href="index.html" class="nav-title">
+  Duby Intercollegiate Associateship
+</a>
+
+
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+</header>
+
+
+ <!-- ===== Favicons ===== -->
+
+<!-- Fallback (always loads) -->
+<link rel="icon" href="/assets/favicons/favicon-light.png">
+
+<!-- Light mode (blue icon for bright browsers) -->
+<link rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicons/favicon-light-32.png"
+      media="(prefers-color-scheme: light)">
+
+<link rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicons/favicon-light-16.png"
+      media="(prefers-color-scheme: light)">
+
+<!-- Dark mode (white icon for dark browsers) -->
+<link rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicons/favicon-dark-32.png"
+      media="(prefers-color-scheme: dark)">
+
+<link rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicons/favicon-dark-16.png"
+      media="(prefers-color-scheme: dark)">
+
+<!-- Apple -->
+<link rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/favicons/apple-touch-icon.png">
+
+
+
+  <!-- MENU OVERLAY -->
+  <nav class="menu" id="menu">
+
+    <!-- DARK OVERLAY BACKGROUND -->
+    <div class="menu-overlay"></div>
+
+    <!-- ACTUAL SIDE PANEL -->
+    <div class="menu-panel">
+      <div class="menu-inner">
+          
+        <div class="menu-group">
+                    <a href="index.html">Home</a>
+                    <a href="programme.html">Programme</a>
+
+<a href="library.html">
+  <span class="menu-strong">Lectures</span>
+  <span class="menu-light">Library</span>
+</a>
+<a href="join.html">
+  <span class="menu-strong">Join</span>
+  <span class="menu-light">the Programme</span>
+</a>
+
+        </div>
+
+        <div class="menu-divider"></div>
+
+        <div class="menu-group">
+          
+<a href="about.html">
+  <span class="menu-light">About</span>
+  <span class="menu-strong">DIA</span>
+</a>
+          <a href="diateam.html">Team</a>
+          <a href="partnerships.html">Partnerships</a>
+<a href="certification.html">
+  <span class="menu-strong">Certification</span>
+  <span class="menu-light">&</span>
+  <span class="menu-strong">Assessment</span>
+</a>
+        </div>
+
+        <div class="menu-divider"></div>
+
+        <div class="menu-group">
+<a href="speaker.html">
+  <span class="menu-strong">Become</span>
+  <span class="menu-light">a Speaker</span>
+</a>
+          <a href="news.html">News / Updates</a>
+        </div>
+
+      </div>
+    </div>
+
+  </nav>
+
+
+<!-- ===================================== -->
+<!-- HERO -->
+<!-- ===================================== -->
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <h1>Upcoming Lectures</h1>
+    <p>
+      Discover the next sessions of the DIA Programme and register to
+      participate in upcoming academic events.
+    </p>
+  </div>
+</section>
+
+<!-- FEATURED SESSION -->
+<section class="featured-lecture">
+  <div class="featured-inner">
+
+    <div class="featured-image">
+      <img id="featured-image"
+           src="lectureupdates/lecture1.jpg"
+           alt="Featured lecture">
+    </div>
+
+    <div class="featured-badge">Next Featured Session</div>
+
+    <h2 id="featured-title" class="featured-title">
+      Loading…
+    </h2>
+
+    <p id="featured-meta" class="featured-meta">
+      Loading…
+    </p>
+
+    <div class="featured-actions">
+      <a href="#" class="btn-featured">Register</a>
+      <a href="#" class="btn-featured">Details</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- LECTURES GRID (AUTO) -->
+<section class="lectures-preview">
+  <div class="lectures-inner">
+
+    <h2 class="lectures-title">Next Sessions</h2>
+
+    <div class="lectures-grid" id="lectures-grid">
+      <!-- JS will inject cards here -->
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===================================== -->
+<!-- PARTNERS STRIP (reuse) -->
+<!-- ===================================== -->
+
+<section class="credibility">
+  <div class="credibility-inner">
+    <div class="partner-logos">
+      <!-- reuse your existing logos here -->
+    </div>
+  </div>
+</section>
+
+<section class="institutional-note">
+  <div class="institutional-inner">
+    <p>
+      In partnership with the Duby Alumni Network.
+    </p>
+  </div>
+</section>
+
+</body>
+</html>
