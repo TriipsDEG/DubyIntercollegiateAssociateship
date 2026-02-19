@@ -426,3 +426,128 @@ document.addEventListener("click", (e) => {
     document.body.classList.remove("menu-open");
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const container = document.getElementById("lectures-container");
+
+  if (!container) return; // Only run on homepage
+
+  fetch("lectures.json")
+    .then(response => response.json())
+    .then(data => {
+
+      // Clear container
+      container.innerHTML = "";
+
+      data.forEach(lecture => {
+
+        const dateObj = new Date(lecture.date);
+        const formattedDate = dateObj.toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        });
+
+        const card = document.createElement("div");
+        card.classList.add("lecture-card");
+
+        card.innerHTML = `
+          <div class="lecture-meta">
+            <span class="lecture-date">${formattedDate}</span>
+            <span class="lecture-time">18:00 CET</span>
+          </div>
+
+          <h3 class="lecture-topic">
+            ${lecture.title}
+          </h3>
+
+          <p class="lecture-speaker">
+            ${lecture.speaker}
+          </p>
+
+          <div class="lecture-actions">
+            <a href="#" class="btn-primary">Register</a>
+            <a href="#" class="btn-secondary">Add to calendar</a>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+    })
+    .catch(error => {
+      console.error("Error loading lectures:", error);
+    });
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const teamContainer = document.getElementById("team-container");
+  if (!teamContainer) return;
+
+  fetch("team.json")
+    .then(response => response.json())
+    .then(data => {
+
+      teamContainer.innerHTML = "";
+
+      // Group by category
+      const categories = {};
+
+      data.forEach(member => {
+        if (!categories[member.category]) {
+          categories[member.category] = [];
+        }
+        categories[member.category].push(member);
+      });
+
+      // Render each category
+      Object.keys(categories).forEach(category => {
+
+        const title = document.createElement("h2");
+        title.classList.add("team-category");
+        title.textContent = category;
+        teamContainer.appendChild(title);
+
+        const grid = document.createElement("div");
+        grid.classList.add("team-grid");
+
+        categories[category].forEach(member => {
+
+          // 🔥 Automatic filename generation
+          const imageName = member.name
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+
+          const imagePath = `assets/team/${imageName}.jpg`;
+
+          const card = document.createElement("div");
+          card.classList.add("team-card");
+
+          card.innerHTML = `
+            <div class="team-photo">
+              <img src="${imagePath}" 
+                   alt="${member.name}"
+                   onerror="this.onerror=null;this.src='assets/team/placeholder.jpg';">
+            </div>
+            ${member.role ? `<p class="team-role">${member.role}</p>` : ""}
+            <h3>${member.name}</h3>
+            <p>${member.description || ""}</p>
+          `;
+
+          grid.appendChild(card);
+        });
+
+        teamContainer.appendChild(grid);
+      });
+
+    })
+    .catch(error => {
+      console.error("Error loading team:", error);
+    });
+
+});

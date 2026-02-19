@@ -1,0 +1,56 @@
+[
+      {
+    "name": "Vadim Sciacca",
+    "role": "Associate Founder",
+    "description": "BSc Economics, King’s College London",
+    "category": "Associate Founders"
+  },
+  {
+    "name": "Antonin Degiovani",
+    "role": "Associate Founder",
+    "description": "BSc International Relations and Organisations, Leiden University",
+    "category": "Associate Founders"
+  },
+
+
+  {
+    "name": "Anouk Niddam",
+    "role": "Academic Advisor",
+    "description": "BA European Politics, University College London",
+    "category": "Board"
+  },
+  { 
+    "name": "Tia Calvini-Lefebvre",
+    "role": "Consultant Academic Advisor",
+    "description": "Sciences Po Undergraduate College",
+    "category": "Board"
+  },
+  {
+  "name": "Amélie Ravat",
+  "role": "Administrator & Event Coordinator",
+  "description": "2+2 Law at AMU and Kent University",
+  "category": "Board"
+  },
+
+  {
+  "name": "To Be Announced",
+  "role": "Community Manager & Communication Officer",
+  "description": "",
+  "category": "Community Manager and Communication Officer"
+  },
+
+
+  {
+    "name": "Martin Lacourt",
+    "role": "Academic Advisor",
+    "description": "Director of armed affairs at the ICRC",
+    "category": "Speaker"
+  },
+  {
+  "name": "Diego Delgotta",
+  "role": "Speaker",
+  "description": "PhD Embryology at Oxford University",
+  "category": "Speakers"
+  }
+
+]
