@@ -161,19 +161,20 @@ async function loadLectures() {
 function renderFeatured(lecture) {
   const titleEl = document.getElementById("featured-title");
   const metaEl = document.getElementById("featured-meta");
-  const imageEl = document.getElementById("featured-image");
+  const imgEl = document.getElementById("featured-image");
 
-  if (!lecture || !titleEl || !metaEl) return;
+  if (!titleEl || !metaEl) return;
 
   titleEl.textContent = lecture.title;
   metaEl.textContent =
     `${formatDate(lecture.date)} · ${lecture.mode} · ${lecture.speaker}`;
 
-  // 🔥 NEW — set image if exists
-  if (imageEl && lecture.image) {
-    imageEl.src = lecture.image;
+  // ✅ SET IMAGE FROM JSON
+  if (imgEl) {
+    imgEl.src = lecture.image || "assets/lectureupdates/placeholder.jpg";
   }
 }
+
 
 
 // =====================================

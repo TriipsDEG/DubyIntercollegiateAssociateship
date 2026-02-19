@@ -581,7 +581,7 @@ body.menu-open {
 
 .programme-hero {
   min-height: 40vh;
-  padding: 120px 40px 0px; /* 120 instead of 150 */
+  padding: 120px 40px 50px; /* 120 instead of 150 */
   background: #0b2f4a;
   color: #E8E6E1;
   display: flex;
@@ -912,9 +912,10 @@ body.menu-open {
 
 .lectures-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax 400px, 3fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 32px;
 }
+
 
 .lecture-card {
   background: #ffffff;
