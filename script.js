@@ -182,7 +182,11 @@ function renderFeatured(lecture) {
 
 function renderUpcoming(lectures) {
   const grid = document.getElementById("lectures-grid");
-  if (!grid) return;
+const featuredTitle = document.getElementById("featured-title");
+const featuredMeta = document.getElementById("featured-meta");
+
+if (!grid || !featuredTitle || !featuredMeta) return;
+
 
   grid.innerHTML = "";
 
@@ -191,23 +195,40 @@ function renderUpcoming(lectures) {
     card.className = "lecture-card";
 
     card.innerHTML = `
-      <div class="lecture-meta">
-        ${formatDate(lecture.date)} · ${lecture.mode}
-      </div>
+  <div class="lecture-meta">
+    <span class="lecture-date">${formatDate(lecture.date)}</span>
+    <span class="lecture-time">18:00 CET</span>
+  </div>
 
-      <div class="lecture-topic">
-        ${lecture.title}
-      </div>
+  <h3 class="lecture-topic">
+    ${lecture.title}
+  </h3>
 
-      <div class="lecture-speaker">
-        ${lecture.speaker}
-      </div>
+  <p class="lecture-speaker">
+    ${lecture.speaker}
+  </p>
 
-      <div class="lecture-actions">
-        <a href="#" class="btn-primary">Register</a>
-        <a href="#" class="btn-secondary">Details</a>
-      </div>
-    `;
+  <div class="lecture-actions">
+    ${lecture.registerLink ? `
+      <a href="${lecture.registerLink}" 
+         class="btn-primary" 
+         target="_blank" 
+         rel="noopener">
+        Register
+      </a>
+    ` : ""}
+
+    ${lecture.calendarLink ? `
+      <a href="${lecture.calendarLink}" 
+         class="btn-secondary" 
+         target="_blank" 
+         rel="noopener">
+        Add to calendar
+      </a>
+    ` : ""}
+  </div>
+`;
+
 
     grid.appendChild(card);
   });
@@ -266,19 +287,45 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderFeatured(lecture) {
   const titleEl = document.getElementById("featured-title");
   const metaEl = document.getElementById("featured-meta");
-  const imgEl = document.getElementById("featured-image");
+  const imageEl = document.getElementById("featured-image");
+  const registerBtn = document.getElementById("registerLink");
+  const calendarBtn = document.getElementById("calendarLink");
 
-  if (!titleEl || !metaEl) return;
+  if (!lecture || !titleEl || !metaEl) return;
 
+  // text
   titleEl.textContent = lecture.title;
   metaEl.textContent =
     `${formatDate(lecture.date)} · ${lecture.mode} · ${lecture.speaker}`;
 
-  // 🔥 THIS WAS MISSING
-  if (imgEl && lecture.image) {
-    imgEl.src = lecture.image;
+  // image
+  if (imageEl && lecture.image) {
+    imageEl.src = lecture.image;
+  }
+
+  // ✅ REGISTER BUTTON
+  if (registerBtn) {
+    if (lecture.registerLink) {
+      registerBtn.href = lecture.registerLink;
+      registerBtn.target = "_blank";
+      registerBtn.style.display = "inline-block";
+    } else {
+      registerBtn.style.display = "none";
+    }
+  }
+
+  // ✅ CALENDAR BUTTON
+  if (calendarBtn) {
+    if (lecture.calendarLink) {
+      calendarBtn.href = lecture.calendarLink;
+      calendarBtn.target = "_blank";
+      calendarBtn.style.display = "inline-block";
+    } else {
+      calendarBtn.style.display = "none";
+    }
   }
 }
+
 
 
 // =====================================
@@ -309,9 +356,25 @@ function renderUpcoming(lectures) {
       </div>
 
       <div class="lecture-actions">
-        <a href="#" class="btn-primary">Register</a>
-        <a href="#" class="btn-secondary">Details</a>
-      </div>
+  ${lecture.registerLink ? `
+    <a href="${lecture.registerLink}" 
+       class="btn-primary" 
+       target="_blank" 
+       rel="noopener">
+      Register
+    </a>
+  ` : ""}
+
+  ${lecture.calendarLink ? `
+    <a href="${lecture.calendarLink}" 
+       class="btn-secondary" 
+       target="_blank" 
+       rel="noopener">
+      Add to calendar
+    </a>
+  ` : ""}
+</div>
+
     `;
 
     grid.appendChild(card);
@@ -394,7 +457,7 @@ window.addEventListener("scroll", () => {
   const indicator = document.querySelector(".scroll-indicator");
   if (!indicator) return;
 
-  if (window.scrollY > 60) {
+  if (window.scrollY > 110) {
     indicator.style.opacity = "0";
   } else {
     indicator.style.opacity = "0.6";
@@ -427,127 +490,134 @@ document.addEventListener("click", (e) => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+// =====================================
+// HOMEPAGE LECTURES
+// =====================================
 
+document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("lectures-container");
+  if (!container) return;
 
-  if (!container) return; // Only run on homepage
-
-  fetch("lectures.json")
-    .then(response => response.json())
-    .then(data => {
-
-      // Clear container
-      container.innerHTML = "";
-
-      data.forEach(lecture => {
-
-        const dateObj = new Date(lecture.date);
-        const formattedDate = dateObj.toLocaleDateString("en-GB", {
-          day: "numeric",
-          month: "long",
-          year: "numeric"
-        });
-
-        const card = document.createElement("div");
-        card.classList.add("lecture-card");
-
-        card.innerHTML = `
-          <div class="lecture-meta">
-            <span class="lecture-date">${formattedDate}</span>
-            <span class="lecture-time">18:00 CET</span>
-          </div>
-
-          <h3 class="lecture-topic">
-            ${lecture.title}
-          </h3>
-
-          <p class="lecture-speaker">
-            ${lecture.speaker}
-          </p>
-
-          <div class="lecture-actions">
-            <a href="#" class="btn-primary">Register</a>
-            <a href="#" class="btn-secondary">Add to calendar</a>
-          </div>
-        `;
-
-        container.appendChild(card);
-      });
-
-    })
-    .catch(error => {
-      console.error("Error loading lectures:", error);
-    });
-
+  loadHomepageLectures();
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+async function loadHomepageLectures() {
+  try {
+    const res = await fetch("lectures.json");
+    const lectures = await res.json();
 
+    if (!lectures || lectures.length === 0) return;
+
+    lectures.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    renderHomepageLectures(lectures.slice(0, 3));
+  } catch (err) {
+    console.error("Homepage lectures failed:", err);
+  }
+}
+
+function renderHomepageLectures(lectures) {
+  const container = document.getElementById("lectures-container");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  lectures.forEach(lecture => {
+    const card = document.createElement("div");
+    card.className = "lecture-card";
+
+    card.innerHTML = `
+      <div class="lecture-meta">
+        ${formatDate(lecture.date)} · ${lecture.mode}
+      </div>
+
+      <div class="lecture-topic">
+        ${lecture.title}
+      </div>
+
+      <div class="lecture-speaker">
+        ${lecture.speaker}
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+// =====================================
+// TEAM SYSTEM
+// =====================================
+
+document.addEventListener("DOMContentLoaded", () => {
   const teamContainer = document.getElementById("team-container");
   if (!teamContainer) return;
 
-  fetch("team.json")
-    .then(response => response.json())
-    .then(data => {
+  loadTeam();
+});
 
-      teamContainer.innerHTML = "";
+async function loadTeam() {
+  try {
+    const res = await fetch("team.json");
+    const data = await res.json();
 
-      // Group by category
-      const categories = {};
+    renderTeam(data);
+  } catch (err) {
+    console.error("Error loading team:", err);
+  }
+}
 
-      data.forEach(member => {
-        if (!categories[member.category]) {
-          categories[member.category] = [];
-        }
-        categories[member.category].push(member);
-      });
+function renderTeam(data) {
+  const teamContainer = document.getElementById("team-container");
+  if (!teamContainer) return;
 
-      // Render each category
-      Object.keys(categories).forEach(category => {
+  teamContainer.innerHTML = "";
 
-        const title = document.createElement("h2");
-        title.classList.add("team-category");
-        title.textContent = category;
-        teamContainer.appendChild(title);
+  // group by category
+  const categories = {};
 
-        const grid = document.createElement("div");
-        grid.classList.add("team-grid");
+  data.forEach(member => {
+    if (!categories[member.category]) {
+      categories[member.category] = [];
+    }
+    categories[member.category].push(member);
+  });
 
-        categories[category].forEach(member => {
+  // render
+  Object.keys(categories).forEach(category => {
+    const title = document.createElement("h2");
+    title.className = "team-category";
+    title.textContent = category;
+    teamContainer.appendChild(title);
 
-          // 🔥 Automatic filename generation
-          const imageName = member.name
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
+    const grid = document.createElement("div");
+    grid.className = "team-grid";
 
-          const imagePath = `assets/team/${imageName}.jpg`;
+    categories[category].forEach(member => {
+      const imageName = member.name
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
 
-          const card = document.createElement("div");
-          card.classList.add("team-card");
+      const imagePath = `assets/team/${imageName}.jpg`;
 
-          card.innerHTML = `
-            <div class="team-photo">
-              <img src="${imagePath}" 
-                   alt="${member.name}"
-                   onerror="this.onerror=null;this.src='assets/team/placeholder.jpg';">
-            </div>
-            ${member.role ? `<p class="team-role">${member.role}</p>` : ""}
-            <h3>${member.name}</h3>
-            <p>${member.description || ""}</p>
-          `;
+      const card = document.createElement("div");
+      card.className = "team-card";
 
-          grid.appendChild(card);
-        });
+      card.innerHTML = `
+        <div class="team-photo">
+          <img src="${imagePath}"
+               alt="${member.name}"
+               onerror="this.onerror=null;this.src='assets/team/placeholder.jpg';">
+        </div>
+        ${member.role ? `<p class="team-role">${member.role}</p>` : ""}
+        <h3>${member.name}</h3>
+        <p>${member.description || ""}</p>
+      `;
 
-        teamContainer.appendChild(grid);
-      });
-
-    })
-    .catch(error => {
-      console.error("Error loading team:", error);
+      grid.appendChild(card);
     });
 
-});
+    teamContainer.appendChild(grid);
+  });
+}
