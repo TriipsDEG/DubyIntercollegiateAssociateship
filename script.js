@@ -400,3 +400,29 @@ window.addEventListener("scroll", () => {
     indicator.style.opacity = "0.6";
   }
 });
+
+// 🔥 compute scrollbar width once
+const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+document.documentElement.style.setProperty(
+  "--scrollbar-width",
+  scrollbarWidth + "px"
+);
+
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("menu");
+  const panel = document.querySelector(".menu-panel");
+  const hamburger = document.getElementById("hamburger");
+
+  const isOpen = menu.classList.contains("active");
+
+  if (!isOpen) return;
+
+  const clickedInsidePanel = panel.contains(e.target);
+  const clickedHamburger = hamburger.contains(e.target);
+
+  if (!clickedInsidePanel && !clickedHamburger) {
+    // 🔥 close menu
+    menu.classList.remove("active");
+    document.body.classList.remove("menu-open");
+  }
+});
