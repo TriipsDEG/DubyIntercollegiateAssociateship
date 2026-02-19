@@ -6,9 +6,8 @@ html {
 }
 
 body.menu-open {
-  overflow: hidden;
+  overflow-x: hidden; /* allow vertical scroll */
 }
-
 
 
 
@@ -193,10 +192,10 @@ body {
 
 
 
-/* prevent layout jump when locking scroll */
 body.menu-open {
-  overflow: hidden;
+  overflow-x: hidden; /* optional */
 }
+
 
 
 
@@ -229,7 +228,7 @@ body.menu-open {
   text-decoration: none;
   font-size: 28px;
   font-weight: 500;
-  opacity: 0.9;
+  opacity: 0.5;
   transition: opacity 0.2s ease;
   line-height: 1.12; /* ← key value */
 }
@@ -470,21 +469,25 @@ body.menu-open {
   line-height: 1.6;
 }
 
-.programme-card {
-  padding: 28px 26px;
-  border: 3px solid rgba(232, 230, 225, 0.18);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.12);
-  transition: all 0.25s ease;
 
-  display: flex;              /* 🔥 key */
-  flex-direction: column;     /* 🔥 key */
-  height: 100%;               /* 🔥 key */
+
+.programme-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 18px;
+  padding: 25px;
+  color: #E8E6E1;
+  width: 250px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
 }
+
 
 .programme-card h3 {
   font-size: 18px;
-  margin-bottom: -20px;
+  margin-bottom: 10px;
   font-weight: 600;
   line-height: 1.25;          /* 🔥 important */
   min-height: 2.5em;          /* 🔥 alignment magic */
@@ -822,6 +825,8 @@ body.menu-open {
   justify-content: space-between; /* logo left, burger right */
 
   background: #0b2f4a;
+
+    box-sizing: border-box;
 
   z-index: 3000;                /* keep it above everything */
 }
@@ -1224,4 +1229,10 @@ body.menu-open {
   0% { transform: translate(-50%, 0); opacity: 0.9; }
   50% { transform: translate(-50%, 8px); opacity: 0.4; }
   100% { transform: translate(-50%, 0); opacity: 0.9; }
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
