@@ -506,7 +506,7 @@ async function loadHomepageLectures() {
 
     lectures.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    renderHomepageLectures(lectures.slice(0, 3));
+    renderHomepageLectures(lectures.slice(0, 2));
   } catch (err) {
     console.error("Homepage lectures failed:", err);
   }
