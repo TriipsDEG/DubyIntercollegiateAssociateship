@@ -617,3 +617,20 @@ function renderTeam(data) {
     teamContainer.appendChild(grid);
   });
 }
+
+// =====================================
+// ACTIVE MENU LINK DETECTION
+// =====================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll(".menu a");
+  const current = window.location.pathname.split("/").pop() || "index.html";
+
+  links.forEach(link => {
+    const href = link.getAttribute("href");
+
+    if (href === current) {
+      link.classList.add("active-page");
+    }
+  });
+});

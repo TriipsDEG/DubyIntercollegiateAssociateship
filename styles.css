@@ -273,6 +273,29 @@ body.menu-open {
   transition-delay: 0.10s;
 }
 
+/* ===================================== */
+/* ACTIVE PAGE INDICATOR */
+/* ===================================== */
+
+.menu a.active-page {
+  opacity: 1;
+  position: relative;
+}
+
+/* elegant right-side indicator */
+.menu a.active-page::after {
+  content: "";
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: #E8E6E1;
+  border-radius: 50%;
+}
+
+
 
 /* ===================================== */
 /* MODERN SCROLL REVEAL */
