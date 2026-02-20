@@ -634,3 +634,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+function initMenu() {
+  const hamburger = document.getElementById("hamburger");
+  const menu = document.getElementById("menu");
+  const overlay = document.querySelector(".menu-overlay");
+
+  if (!hamburger || !menu || !overlay) return;
+
+  hamburger.addEventListener("click", () => {
+    menu.classList.toggle("active");
+    document.body.classList.toggle("menu-open");
+  });
+
+  overlay.addEventListener("click", () => {
+    menu.classList.remove("active");
+    document.body.classList.remove("menu-open");
+  });
+
+  // =====================================
+// ACTIVE PAGE DETECTION
+// =====================================
+
+const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+document.querySelectorAll(".menu a").forEach(link => {
+  const linkPage = link.getAttribute("href");
+
+  if (linkPage === currentPage) {
+    link.classList.add("active-page");
+  }
+});
+}
