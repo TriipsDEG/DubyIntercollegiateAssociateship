@@ -666,3 +666,45 @@ document.querySelectorAll(".menu a").forEach(link => {
   }
 });
 }
+// =====================================
+// LOAD NAVBAR COMPONENT
+// =====================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const navbarPlaceholder = document.getElementById("navbar-placeholder");
+
+  if (navbarPlaceholder) {
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        navbarPlaceholder.innerHTML = data;
+
+        // 🔥 re-bind hamburger AFTER injection
+        const hamburger = document.getElementById("hamburger");
+        const menu = document.getElementById("menu");
+
+        if (hamburger && menu) {
+          hamburger.addEventListener("click", () => {
+            menu.classList.toggle("active");
+            document.body.classList.toggle("menu-open");
+          });
+        }
+      });
+  }
+});
+
+// =====================================
+// LOAD FAVICONS (EARLY LOAD)
+// =====================================
+
+(function () {
+  const placeholder = document.getElementById("favicons-placeholder");
+  if (!placeholder) return;
+
+  fetch("favicons.html")
+    .then(r => r.text())
+    .then(html => {
+      placeholder.outerHTML = html;
+    })
+    .catch(err => console.error("Favicon load error:", err));
+})();
