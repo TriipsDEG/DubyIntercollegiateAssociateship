@@ -458,7 +458,7 @@ window.addEventListener("scroll", () => {
   const indicator = document.querySelector(".scroll-indicator");
   if (!indicator) return;
 
-  if (window.scrollY > 110) {
+  if (window.scrollY > 130) {
     indicator.style.opacity = "0";
   } else {
     indicator.style.opacity = "0.6";
@@ -708,3 +708,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch(err => console.error("Favicon load error:", err));
 })();
+

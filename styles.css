@@ -1260,3 +1260,40 @@ body.menu-open {
   margin: 0 auto;
   padding: 0 24px;
 }
+
+/* ===================================== */
+/* SIMPLE DIA LOADER */
+/* ===================================== */
+
+#page-loader {
+  position: fixed;
+  inset: 0;
+  background: #0b2f4a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.6s ease;
+}
+
+#page-loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* spinner */
+
+.loader-spinner {
+  width: 46px;
+  height: 46px;
+  border: 3px solid rgba(232,230,225,0.25);
+  border-top-color: #E8E6E1;
+  border-radius: 50%;
+  animation: diaSpin 0.9s linear infinite;
+}
+
+@keyframes diaSpin {
+  to { transform: rotate(360deg); }
+}
+
+

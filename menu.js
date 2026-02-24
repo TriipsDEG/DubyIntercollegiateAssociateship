@@ -14,3 +14,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch(err => console.error("Menu load error:", err));
 });
+
