@@ -709,3 +709,10 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(err => console.error("Favicon load error:", err));
 })();
 
+// FOOTER
+fetch("footer.html")
+  .then(response => response.text())
+  .then(data => {
+    const footer = document.getElementById("footer-placeholder");
+    if (footer) footer.innerHTML = data;
+  });
