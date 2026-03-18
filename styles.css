@@ -314,7 +314,7 @@ body.menu-open {
 /* ===================================== */
 
 .info {
-  padding: 120px 0px;
+  padding: 30px 50px 60px;
     background: #E8E6E1;
   color: #0b2f4a;
 }
@@ -696,7 +696,7 @@ body.menu-open {
 /* ===================================== */
 
 .page-hero {
-  padding: 80px 40px 15px;
+  padding: 80px 40px 0px;
   background: #E8E6E1;
   color: #0b2f4a;
   line-height: 1.5;
