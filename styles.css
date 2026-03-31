@@ -1208,18 +1208,22 @@ body.menu-open {
 /* ===================================== */
 
 .scroll-indicator {
-  position: fixed;          /* ⭐ KEY CHANGE */
-  bottom: 28px;             /* distance from bottom of screen */
+  position: fixed;
+  bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0.6;
   pointer-events: none;
   z-index: 100;
+
+  display: flex;              /* 🔥 ADD THIS */
+  flex-direction: column;     /* stack vertically */
+  align-items: center;        /* center horizontally */
 }
 
 .scroll-indicator span {
   display: block;
-  width: 42px;
+  width: 32px;
   height: 42px;
   border: 2px solid rgba(232, 230, 225, 0.7);
   border-radius: 17px;
@@ -1291,3 +1295,11 @@ body.menu-open {
 }
 
 
+.scroll-text {
+  margin-top: 10px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(232, 230, 225, 0.7);
+  text-transform: uppercase;
+  text-align: center;
+}
