@@ -314,7 +314,7 @@ body.menu-open {
 /* ===================================== */
 
 .info {
-  padding: 30px 50px 60px;
+  padding: 50px 50px 60px;
     background: #E8E6E1;
   color: #0b2f4a;
 }
@@ -635,7 +635,7 @@ body.menu-open {
 /* ===================================== */
 
 .programme-explainer {
-  padding: 20px 200px 100px;
+  padding: 20px 100px 50px;
     background: #0b2f4a;
   color: #E8E6E1;
 }
@@ -704,13 +704,10 @@ body.menu-open {
 
 
 .page-hero-inner {
-  padding: 30px 40px;
+  padding: 40px 40px;
   max-width: 1200px;
 }
 
-.page-hero-inner h1 {
-  margin-bottom: 20px;
-}
 
 .page-title {
   font-size: clamp(42px, 5vw, 64px);
@@ -910,7 +907,7 @@ body.menu-open {
 /* ===================================== */
 
 .lectures-preview {
-  padding: 120px 40px;
+  padding: 50px 40px;
   background: #E8E6E1;
   color: #0b2f4a;
 }
@@ -1159,7 +1156,7 @@ body.menu-open {
 
 .join-section {
   background: #E8E6E1;
-  padding: 60px 40px 120px;
+  padding: 20px 40px 40px;
 }
 
 .join-inner {
