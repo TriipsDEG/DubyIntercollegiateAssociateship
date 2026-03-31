@@ -1214,15 +1214,15 @@ body.menu-open {
   transform: translateX(-50%);
   opacity: 0.6;
   pointer-events: none;
-  z-index: 50;
+  z-index: 100;
 }
 
 .scroll-indicator span {
   display: block;
-  width: 22px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
   border: 2px solid rgba(232, 230, 225, 0.7);
-  border-radius: 12px;
+  border-radius: 17px;
   position: relative;
 }
 
@@ -1234,7 +1234,7 @@ body.menu-open {
   top: 6px;
   left: 50%;
   width: 3px;
-  height: 6px;
+  height: 12px;
   background: rgba(232, 230, 225, 0.9);
   border-radius: 2px;
   transform: translateX(-50%);
